@@ -1,0 +1,34 @@
+%YAML 1.2
+---
+# See http://www.sublimetext.com/docs/3/syntax.html
+name: LeoScript
+file_extensions: [ leo ]
+scope: source.leo
+
+contexts:
+  main:
+    - include: keywords
+    - include: numbers
+    - include: strings
+
+  keywords:
+    - match: '\b(absent|any|apply|applying|as|be|become|bind|cause|check|choice|comment|content|debug|define|do|doing|end|equal|error|evaluate|example|fail|function|get|give|gives|given|giving|hash|have|head|help|infinity|is|java|let|library|list|load|macro|make|matching|name|no|not|number|of|one|option|present|print|private|quote|recurse|recursing|recursive|repeat|repeating|select|set|success|structure|switch|tail|take|taking|test|text|the|to|trace|try|type|update|use|value|with|yes)\b'
+      scope: keyword.control.leo
+
+  numbers:
+    - match: '\b(-)?[0-9.]+\b'
+      scope: constant.numeric.leo
+
+  strings:
+    - match: '"'
+      scope: punctuation.definition.string.begin.leo
+      push: inside_string
+
+  inside_string:
+    - meta_include_prototype: false
+    - meta_scope: string.quoted.double.leo
+    - match: '\.'
+      scope: constant.character.escape.leo
+    - match: '"'
+      scope: punctuation.definition.string.end.leo
+      pop: true
