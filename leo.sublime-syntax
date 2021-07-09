@@ -12,7 +12,7 @@ contexts:
     - include: strings
 
   keywords:
-    - match: '\b(absent|any|anything|apply|applying|as|be|become|before|bind|cause|check|choice|comment|content|debug|define|do|doing|end|equal|error|evaluate|example|fail|function|get|give|gives|given|giving|hash|have|head|help|infinity|is|java|let|library|list|load|macro|make|matching|name|no|not|number|of|one|option|present|print|private|quote|recurse|recursing|recursive|repeat|repeating|select|set|success|structure|switch|tail|take|taking|test|text|the|thing|to|trace|try|type|update|use|value|with|yes)\b'
+    - match: '\b(absent|action|add|any|anything|apply|applying|as|be|become|before|bind|cause|check|choice|comment|content|debug|define|do|does|doing|drop|either|end|equal|equals|error|evaluate|example|fail|first|forget|function|get|give|gives|given|giving|hash|have|head|help|infinity|is|java|let|library|list|load|macro|make|matching|minus|name|no|not|number|of|one|option|perform|pick|plus|present|print|private|quote|recurse|recursing|recursive|remember|repeat|repeating|second|select|set|success|structure|switch|tail|take|taking|test|text|the|thing|times|to|trace|try|type|update|use|value|with|yes)\b'
       scope: keyword.control.leo
 
   numbers:
