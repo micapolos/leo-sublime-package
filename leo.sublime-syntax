@@ -1,7 +1,7 @@
 %YAML 1.2
 ---
 # See http://www.sublimetext.com/docs/3/syntax.html
-name: LeoScript
+name: Leo
 file_extensions: [ leo ]
 scope: source.leo
 
@@ -10,14 +10,21 @@ contexts:
     - include: keywords
     - include: numbers
     - include: strings
+    - include: comments
 
   keywords:
-    - match: '\b(absent|action|add|any|anything|apply|applying|as|be|become|before|bind|cause|check|choice|comment|content|debug|define|do|does|doing|drop|either|end|equal|equals|error|evaluate|example|fail|first|forget|function|get|give|gives|given|giving|hash|have|head|help|infinity|is|java|let|library|list|load|macro|make|matching|minus|name|no|not|number|of|one|option|perform|pick|plus|present|print|private|quote|recurse|recursing|recursive|remember|repeat|repeating|second|select|set|success|structure|switch|tail|take|taking|test|text|the|thing|times|to|trace|try|type|update|use|value|with|yes)\b'
+    - match: '\b(require|bind|native|choice|being|first|second|define|do|does|doing|function|get|giving|is|of|check-equal?|the)\b'
       scope: keyword.control.leo
+    - match: '\b(boolean|number|string)\b'
+      scope: entity.name.leo
 
   numbers:
     - match: '\b(-)?[0-9.]+\b'
       scope: constant.numeric.leo
+
+  comments:
+    - match: ';.*'
+      scope: comment.leo
 
   strings:
     - match: '"'
