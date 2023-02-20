@@ -17,6 +17,8 @@ contexts:
       scope: keyword.control.leo
     - match: '\b(boolean|number|string)\b'
       scope: entity.name.leo
+    - match: '(\.|\:)'
+      scope: keyword.operator.leo
 
   numbers:
     - match: '\b(-)?[0-9.]+\b'
