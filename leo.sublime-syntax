@@ -2,7 +2,7 @@
 ---
 # See http://www.sublimetext.com/docs/3/syntax.html
 name: Leo
-file_extensions: [ leo ]
+file_extensions: [ leo, leos ]
 scope: source.leo
 
 contexts:
@@ -11,22 +11,27 @@ contexts:
     - include: numbers
     - include: strings
     - include: comments
+    - include: preprocessor
 
   keywords:
     - match: '\b(require|bind|native|choice|being|first|second|define|do|does|doing|function|get|giving|is|of|check-equal?|the)\b'
       scope: keyword.control.leo
-    - match: '\b(boolean|number|string)\b'
-      scope: entity.name.leo
+    - match: '\b(boolean|number|string|flonum|fixnum)\b'
+      scope: entity.name.type.leo
     - match: '(\.|\:)'
       scope: keyword.operator.leo
 
   numbers:
     - match: '\b(-)?[0-9.]+\b'
-      scope: constant.numeric.leo
+      scope: constant.language.leo
 
   comments:
     - match: ';.*'
-      scope: comment.leo
+      scope: comment.line.leo
+
+  preprocessor:
+    - match: '#lang'
+      scope: keyword.control.leo
 
   strings:
     - match: '"'
