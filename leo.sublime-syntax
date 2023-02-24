@@ -14,7 +14,7 @@ contexts:
     - include: preprocessor
 
   keywords:
-    - match: '\b(any|apply|as|being|check-equals|choice|define|do|does|doing|else|false|first|giving|is|make|of|racket|recursively|require|second|the|then|thing|true)\b'
+    - match: '\b(any|apply|as|being|check-equals|choice|define|do|does|doing|else|false|first|giving|is|make|of|racket|recursively|require|second|the|then|thing|to-string|true)\b'
       scope: keyword.control.leo
     - match: '\b(boolean|flonum|fixnum|number|string)\b'
       scope: entity.name.type.leo
