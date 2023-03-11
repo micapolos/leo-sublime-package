@@ -14,7 +14,7 @@ contexts:
     - include: preprocessor
 
   keywords:
-    - match: '\b(apply|check|choice|do|does|get|giving|match|not|quote|racket|recipe|recursively|select|test|the|then|type)\b'
+    - match: '\b(apply|check|choice|do|does|generic|get|giving|match|not|quote|racket|recipe|recursive|recursively|select|test|the|then|type|variable)\b'
       scope: keyword.control.leo
     - match: '\b(boolean|float|int|number|text)\b'
       scope: entity.name.type.leo
