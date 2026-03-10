@@ -3,15 +3,21 @@
 # See http://www.sublimetext.com/docs/3/syntax.html
 name: Leo
 file_extensions: [ leo, leos ]
+first_line_match: "^#!.*\\b/leo(?=\\s|$)"
 scope: source.leo
 
 contexts:
   main:
+    - include: shebang
     - include: keywords
     - include: numbers
     - include: strings
     - include: comments
     - include: preprocessor
+
+  shebang:
+    - match: '^#!.*'
+      scope: comment.line.shebang
 
   keywords:
     - match: '\b(apply|assemble|check|choice|debug|disassemble|do|does|doing|everything|generic|get|gives|giving|in|it|make|match|not|of|quote|package|racket|recipe|recursive|recursively|select|switch|test|the|then|thing|type|use|with|variable)\b'
