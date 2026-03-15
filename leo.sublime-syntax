@@ -9,7 +9,7 @@ scope: source.leo
 variables:
   ident_chars: '[a-zA-Z0-9!$%&*/<=>?^_~+\-.@]'
 
-  start: '(?<!{{ident_chars}})'
+  begin: '(?<!{{ident_chars}})'
   end: '(?!{{ident_chars}})'
 
 contexts:
@@ -38,25 +38,24 @@ contexts:
         [0-7]{3}|x[0-9a-fA-F]+|.)'
       scope: constant.character.leo
 
-  # Keywords are defined before general identifiers to ensure they color correctly
   keywords:
-    # Special Statements (Highest priority)
-    - match: '{{start}}(import|export|library){{end}}'
-      scope: keyword.control.import.leo
-
-    # Control & Syntax Identifiers (Including syntax->datum)
-    # We use lookaheads/lookbehinds instead of \b
-    - match: '{{start}}(syntax->datum|datum->syntax|define-syntax|unquote-splicing|unquote|lambda|if|else|cond|set!){{end}}'
+    - match: '{{begin}}(syntax->datum|datum->syntax|define-syntax|define-values|unquote-splicing|assemble|apply|data|rename|only|prefix|except|check|choice|debug|disassemble|do|does|doing|everything|generic|get|gives|giving|in|it|make|match|not|of|quote|package|racket|recipe|recursive|recursively|select|switch|test|the|then|thing|type|use|with|variable){{end}}'
       scope: keyword.control.leo
+
+    - match: '{{begin}}(define|lambda|if|else|cond|and|or|begin|let|let\*|letrec|set!|unquote){{end}}'
+      scope: keyword.declaration.leo
+
+    - match: '{{begin}}(base|boolean|float|int|number|text){{end}}'
+      scope: storage.type.leo
 
   punctuation:
     - match: '[,:]'
       scope: punctuation.separator.leo
 
   math_operators:
-    - match: '{{start}}([+\-*/]){{end}}'
+    - match: '{{begin}}([+\-*/]){{end}}'
       scope: keyword.operator.arithmetic.leo
-    - match: '{{start}}(<=|>=|<|>|=){{end}}'
+    - match: '{{begin}}(<=|>=|<|>|=){{end}}'
       scope: keyword.operator.comparison.leo
 
   identifiers:
