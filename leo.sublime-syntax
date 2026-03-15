@@ -13,6 +13,7 @@ contexts:
     - include: strings
     - include: constants
     - include: keywords
+    - include: math_operators
     - include: identifiers
     - include: numbers
     - include: preprocessor
@@ -50,7 +51,12 @@ contexts:
     - match: '[,:]'
       scope: punctuation.separator.leo
 
-  # Scheme Identifiers: Allows for extended characters and doesn't have to start with a letter
+  math_operators:
+    - match: '(?<![a-zA-Z0-9!$%&*/<=>?^_~+\-.@])([+\-*/])(?![a-zA-Z0-9!$%&*/<=>?^_~+\-.@])'
+      scope: keyword.operator.arithmetic.leo
+    - match: '(?<![a-zA-Z0-9!$%&*/<=>?^_~+\-.@])(<=|>=|<|>|=)(?![a-zA-Z0-9!$%&*/<=>?^_~+\-.@])'
+      scope: keyword.operator.comparison.leo
+
   identifiers:
     - match: '(?x)
         [a-zA-Z!$%&*/<=>?^_~]
@@ -77,8 +83,14 @@ contexts:
   inside_string:
     - meta_include_prototype: false
     - meta_scope: string.quoted.double.leo
-    - match: '\\.'
+    - match: '\\"'
       scope: constant.character.escape.leo
+    - match: '\\\\'
+      scope: constant.character.escape.leo
+    - match: '\\(?i:[abtnrvf]|x[0-9a-fA-F]+;)'
+      scope: constant.character.escape.leo
+    - match: '\\\n\s*'
+      scope: punctuation.separator.continuation.leo
     - match: '"'
       scope: punctuation.definition.string.end.leo
       pop: true
