@@ -16,7 +16,14 @@ variables:
       | datum->syntax
       | define-syntax
       | define-values
+      | quote
+      | quasiquote
       | unquote-splicing
+      | unquote
+      | syntax
+      | quasisyntax
+      | unsyntax
+      | unsyntax-splicing
       | assemble
       | apply
       | data
@@ -43,7 +50,6 @@ variables:
       | match
       | not
       | of
-      | quote
       | package
       | racket
       | recipe
@@ -77,7 +83,6 @@ variables:
       | let\*
       | letrec
       | set!
-      | unquote
     )'
 
   char_constant_list: '(?x:
@@ -91,18 +96,6 @@ variables:
       | space
       | tab
       | vtab
-    )'
-
-  storage_type_list: '(?x:
-      base
-      | boolean
-      | float
-      | int
-      | number
-      | text
-      | string
-      | fixnum
-      | char
     )'
 
 contexts:
@@ -136,9 +129,6 @@ contexts:
 
     - match: '{{begin}}({{declaration_list}}){{end}}'
       scope: keyword.declaration.leo
-
-    - match: '{{begin}}({{storage_type_list}}){{end}}'
-      scope: storage.type.leo
 
   punctuation:
     - match: '[,:]'
