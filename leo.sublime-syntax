@@ -73,6 +73,13 @@ variables:
   declaration_list: '(?x:
       define
       | lambda
+      | library
+      | import
+      | export
+      | prefix
+      | rename
+      | only
+      | except
       | if
       | else
       | cond
