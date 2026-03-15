@@ -123,7 +123,9 @@ contexts:
       scope: comment.line.shebang
 
   constants:
-    - match: '#[tf]\b'
+    - match: '(?i){{begin}}(#[tf]|#true|#false){{end}}'
+      scope: constant.language.boolean.leo
+    - match: '{{begin}}(true|false){{end}}'
       scope: constant.language.boolean.leo
     - match: '(?x)\#\\({{char_constant_list}}|[0-7]{3}|x[0-9a-fA-F]+|.)'
       scope: string.quoted.other.character.leo
