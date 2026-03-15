@@ -28,7 +28,7 @@ contexts:
       scope: keyword.control.quote.leo
     - match: '\b(syntax|quasisyntax|unsyntax-splicing|unsyntax)\b'
       scope: keyword.control.syntax.leo
-    - match: '\b(lambda|if|set!|begin|cond|when|unless|with|lets|and|or|case|let|let\*|letrec|do|delay|parameterize|guard|quasiquote|unquote|unquote-splicing)\b'
+    - match: '\b(data|enum|lambda|if|set!|begin|cond|when|unless|with|lets|and|or|case|let|let\*|letrec|do|delay|parameterize|guard|quasiquote|unquote|unquote-splicing)\b'
       scope: keyword.control.leo
     - match: '\b(apply|import|export|library|rename|only|prefix|except|check|choice|debug|do|in|make|match|not|of|package|select|switch|test|use|with)\b'
       scope: keyword.other.leo
