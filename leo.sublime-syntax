@@ -11,14 +11,25 @@ contexts:
     - include: shebang
     - include: comments
     - include: strings
+    - include: constants
     - include: keywords
     - include: identifiers
     - include: numbers
     - include: preprocessor
+    - include: punctuation
 
   shebang:
     - match: '^#!.*'
       scope: comment.line.shebang
+
+  constants:
+    - match: '#[tf]\b'
+      scope: constant.language.boolean.leo
+    - match: '(?x)
+        \#\\
+        (alarm|backspace|delete|escape|newline|null|return|space|tab|vtab|
+        [0-7]{3}|x[0-9a-fA-F]+|.)'
+      scope: constant.character.leo
 
   # Keywords are defined before general identifiers to ensure they color correctly
   keywords:
@@ -35,11 +46,15 @@ contexts:
     - match: '\b(boolean|float|int|number|text|base)\b'
       scope: storage.type.leo
 
+  punctuation:
+    - match: '[,:]'
+      scope: punctuation.separator.leo
+
   # Scheme Identifiers: Allows for extended characters and doesn't have to start with a letter
   identifiers:
     - match: '(?x)
-        [a-zA-Z!$%&*/:<=>?^_~]
-        [a-zA-Z0-9!$%&*/:<=>?^_~+\-.@]*'
+        [a-zA-Z!$%&*/<=>?^_~]
+        [a-zA-Z0-9!$%&*/<=>?^_~+\-.@]*'
       scope: variable.function.leo
 
   numbers:
