@@ -8,9 +8,102 @@ scope: source.leo
 
 variables:
   ident_chars: '[a-zA-Z0-9!$%&*/<=>?^_~+\-.@]'
-
   begin: '(?<!{{ident_chars}})'
   end: '(?!{{ident_chars}})'
+
+  control_list: '(?x:
+      syntax->datum
+      | datum->syntax
+      | define-syntax
+      | define-values
+      | unquote-splicing
+      | assemble
+      | apply
+      | data
+      | enum
+      | rename
+      | only
+      | prefix
+      | except
+      | check
+      | choice
+      | debug
+      | disassemble
+      | do
+      | does
+      | doing
+      | everything
+      | generic
+      | get
+      | gives
+      | giving
+      | in
+      | it
+      | make
+      | match
+      | not
+      | of
+      | quote
+      | package
+      | racket
+      | recipe
+      | recursive
+      | recursively
+      | select
+      | switch
+      | test
+      | the
+      | then
+      | thing
+      | type
+      | use
+      | with
+      | variable
+      | when
+      | unless
+      | from
+    )'
+
+  declaration_list: '(?x:
+      define
+      | lambda
+      | if
+      | else
+      | cond
+      | and
+      | or
+      | begin
+      | let
+      | let\*
+      | letrec
+      | set!
+      | unquote
+    )'
+
+  char_constant_list: '(?x:
+      alarm
+      | backspace
+      | delete
+      | escape
+      | newline
+      | null
+      | return
+      | space
+      | tab
+      | vtab
+    )'
+
+  storage_type_list: '(?x:
+      base
+      | boolean
+      | float
+      | int
+      | number
+      | text
+      | string
+      | fixnum
+      | char
+    )'
 
 contexts:
   main:
@@ -32,20 +125,17 @@ contexts:
   constants:
     - match: '#[tf]\b'
       scope: constant.language.boolean.leo
-    - match: '(?x)
-        \#\\
-        (alarm|backspace|delete|escape|newline|null|return|space|tab|vtab|
-        [0-7]{3}|x[0-9a-fA-F]+|.)'
-      scope: constant.character.leo
+    - match: '(?x)\#\\({{char_constant_list}}|[0-7]{3}|x[0-9a-fA-F]+|.)'
+      scope: string.quoted.other.character.leo
 
   keywords:
-    - match: '{{begin}}(syntax->datum|datum->syntax|define-syntax|define-values|unquote-splicing|assemble|apply|data|rename|only|prefix|except|check|choice|debug|disassemble|do|does|doing|everything|generic|get|gives|giving|in|it|make|match|not|of|quote|package|racket|recipe|recursive|recursively|select|switch|test|the|then|thing|type|use|with|variable){{end}}'
+    - match: '{{begin}}({{control_list}}){{end}}'
       scope: keyword.control.leo
 
-    - match: '{{begin}}(define|lambda|if|else|cond|and|or|begin|let|let\*|letrec|set!|unquote){{end}}'
+    - match: '{{begin}}({{declaration_list}}){{end}}'
       scope: keyword.declaration.leo
 
-    - match: '{{begin}}(base|boolean|float|int|number|text){{end}}'
+    - match: '{{begin}}({{storage_type_list}}){{end}}'
       scope: storage.type.leo
 
   punctuation:
