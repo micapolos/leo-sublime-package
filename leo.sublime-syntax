@@ -1,7 +1,7 @@
 %YAML 1.2
 ---
-# See http://www.sublimetext.com/docs/3/syntax.html
-name: Leo
+# http://www.sublimetext.com/docs/3/syntax.html
+name: Leo (Scheme-style)
 file_extensions: [ leo, leos ]
 first_line_match: "^#!.*\\b/leo(?=\\s|$)"
 scope: source.leo
@@ -9,30 +9,45 @@ scope: source.leo
 contexts:
   main:
     - include: shebang
-    - include: keywords
-    - include: numbers
-    - include: strings
     - include: comments
+    - include: strings
+    - include: keywords
+    - include: identifiers
+    - include: numbers
     - include: preprocessor
 
   shebang:
     - match: '^#!.*'
       scope: comment.line.shebang
 
+  # Keywords are defined before general identifiers to ensure they color correctly
   keywords:
-    - match: '\b(apply|assemble|define|data|import|export|library|rename|only|prefix|except|check|choice|debug|disassemble|do|does|doing|everything|generic|get|gives|giving|in|it|make|match|not|of|quote|package|racket|recipe|recursive|recursively|select|switch|test|the|then|thing|type|use|with|variable)\b'
+    - match: '\b(define-syntax|define-library|define-values|define)\b'
+      scope: keyword.declaration.leo
+    - match: '\b(quote|quasiquote|unquote-splicing|unquote)\b'
+      scope: keyword.control.quote.leo
+    - match: '\b(syntax|quasisyntax|unsyntax-splicing|unsyntax)\b'
+      scope: keyword.control.syntax.leo
+    - match: '\b(lambda|if|set!|begin|cond|when|unless|with|lets|and|or|case|let|let\*|letrec|do|delay|parameterize|guard|quasiquote|unquote|unquote-splicing)\b'
       scope: keyword.control.leo
-    - match: '\b(base|boolean|float|int|number|text)\b'
-      scope: entity.name.type.leo
-    - match: '(\.|\:)'
-      scope: keyword.operator.leo
+    - match: '\b(apply|import|export|library|rename|only|prefix|except|check|choice|debug|do|in|make|match|not|of|package|select|switch|test|use|with)\b'
+      scope: keyword.other.leo
+    - match: '\b(boolean|float|int|number|text|base)\b'
+      scope: storage.type.leo
+
+  # Scheme Identifiers: Allows for extended characters and doesn't have to start with a letter
+  identifiers:
+    - match: '(?x)
+        [a-zA-Z!$%&*/:<=>?^_~]
+        [a-zA-Z0-9!$%&*/:<=>?^_~+\-.@]*'
+      scope: variable.function.leo
 
   numbers:
-    - match: '\b(-)?[0-9.]+\b'
-      scope: constant.language.leo
+    - match: '\b[-]?[0-9]+(\.[0-9]+)?\b'
+      scope: constant.numeric.leo
 
   comments:
-    - match: '(comment .*|comment:.*)'
+    - match: '(comment .*|comment:.*|;.*)'
       scope: comment.line.leo
 
   preprocessor:
@@ -47,7 +62,7 @@ contexts:
   inside_string:
     - meta_include_prototype: false
     - meta_scope: string.quoted.double.leo
-    - match: '\.'
+    - match: '\\.'
       scope: constant.character.escape.leo
     - match: '"'
       scope: punctuation.definition.string.end.leo
