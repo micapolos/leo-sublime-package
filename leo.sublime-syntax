@@ -6,6 +6,12 @@ file_extensions: [ leo, leos ]
 first_line_match: "^#!.*\\b/leo(?=\\s|$)"
 scope: source.leo
 
+variables:
+  ident_chars: '[a-zA-Z0-9!$%&*/<=>?^_~+\-.@]'
+
+  start: '(?<!{{ident_chars}})'
+  end: '(?!{{ident_chars}})'
+
 contexts:
   main:
     - include: shebang
@@ -34,27 +40,23 @@ contexts:
 
   # Keywords are defined before general identifiers to ensure they color correctly
   keywords:
-    - match: '\b(define-syntax|define-library|define-values|define)\b'
-      scope: keyword.declaration.leo
-    - match: '\b(quote|quasiquote|unquote-splicing|unquote)\b'
-      scope: keyword.control.quote.leo
-    - match: '\b(syntax|quasisyntax|unsyntax-splicing|unsyntax)\b'
-      scope: keyword.control.syntax.leo
-    - match: '\b(data|enum|lambda|if|set!|begin|cond|when|unless|with|lets|and|or|case|let|let\*|letrec|do|delay|parameterize|guard|quasiquote|unquote|unquote-splicing)\b'
+    # Special Statements (Highest priority)
+    - match: '{{start}}(import|export|library){{end}}'
+      scope: keyword.control.import.leo
+
+    # Control & Syntax Identifiers (Including syntax->datum)
+    # We use lookaheads/lookbehinds instead of \b
+    - match: '{{start}}(syntax->datum|datum->syntax|define-syntax|unquote-splicing|unquote|lambda|if|else|cond|set!){{end}}'
       scope: keyword.control.leo
-    - match: '\b(apply|import|export|library|rename|only|prefix|except|check|choice|debug|do|in|make|match|not|of|package|select|switch|test|use|with)\b'
-      scope: keyword.other.leo
-    - match: '\b(boolean|float|int|number|text|base)\b'
-      scope: storage.type.leo
 
   punctuation:
     - match: '[,:]'
       scope: punctuation.separator.leo
 
   math_operators:
-    - match: '(?<![a-zA-Z0-9!$%&*/<=>?^_~+\-.@])([+\-*/])(?![a-zA-Z0-9!$%&*/<=>?^_~+\-.@])'
+    - match: '{{start}}([+\-*/]){{end}}'
       scope: keyword.operator.arithmetic.leo
-    - match: '(?<![a-zA-Z0-9!$%&*/<=>?^_~+\-.@])(<=|>=|<|>|=)(?![a-zA-Z0-9!$%&*/<=>?^_~+\-.@])'
+    - match: '{{start}}(<=|>=|<|>|=){{end}}'
       scope: keyword.operator.comparison.leo
 
   identifiers:
