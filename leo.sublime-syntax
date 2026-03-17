@@ -68,6 +68,12 @@ variables:
       | when
       | unless
       | from
+      | <<
+      | >>
+      | >>\*
+      | <<<
+      | >>>
+      | >>>\*
     )'
 
   declaration_list: '(?x:
