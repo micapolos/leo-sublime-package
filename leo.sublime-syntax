@@ -76,6 +76,7 @@ variables:
       | >>>
       | \|\|\|
       | \|\|
+      | \.\.\.
     )'
 
   declaration_list: '(?x:
