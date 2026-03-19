@@ -153,6 +153,8 @@ contexts:
       scope: keyword.operator.arithmetic.leo
     - match: '{{begin}}(<=|>=|<|>|=){{end}}'
       scope: keyword.operator.comparison.leo
+    - match: '{{begin}}(\(|\)\.\.\.|\)|}){{end}}'
+      scope: keyword.control.parentheses.leo
 
   identifiers:
     - match: '(?x)
