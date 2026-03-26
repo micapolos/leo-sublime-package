@@ -141,6 +141,15 @@ contexts:
     - match: '{{begin}}({{control_list}}){{end}}'
       scope: keyword.control.leo
 
+    - match: '`\.\.\.'
+      scope: punctuation.definition.unquote-splicing.leo
+
+    - match: '`'
+      scope: punctuation.definition.quasiquote.leo
+
+    - match: "'"
+      scope: punctuation.definition.quote.leo
+
     - match: '{{begin}}({{declaration_list}}){{end}}'
       scope: keyword.declaration.leo
 
