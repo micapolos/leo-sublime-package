@@ -73,6 +73,7 @@ variables:
 
   declaration_list: '(?x:
       define
+      | value
       | lambda
       | library
       | import
