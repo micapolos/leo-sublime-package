@@ -1,0 +1,133 @@
+{ scopeName = 'source.leo';
+  name = 'Leo (Scheme-style)';
+  fileTypes = ( 'leo', 'leos' );
+  firstLineMatch = '^#!.*\b/leo(?=\s|$)';
+  patterns = (
+    { include = '#shebang'; },
+    { include = '#comments'; },
+    { include = '#strings'; },
+    { include = '#constants'; },
+    { include = '#keywords'; },
+    { include = '#math_operators'; },
+    { include = '#identifiers'; },
+    { include = '#numbers'; },
+    { include = '#preprocessor'; },
+    { include = '#punctuation'; },
+  );
+  repository = {
+    shebang = {
+      patterns = (
+        { match = '^#!.*';
+          name = 'comment.line.shebang';
+        },
+      );
+    };
+    comments = {
+      patterns = (
+        { match = '(comment .*|comment:.*|;.*)';
+          name = 'comment.line.leo';
+        },
+      );
+    };
+    strings = {
+      patterns = (
+        { name = 'string.quoted.double.leo';
+          begin = '"';
+          end = '"';
+          beginCaptures = { 0 = { name = 'punctuation.definition.string.begin.leo'; }; };
+          endCaptures = { 0 = { name = 'punctuation.definition.string.end.leo'; }; };
+          patterns = (
+            { match = '\\"';
+              name = 'constant.character.escape.leo';
+            },
+            { match = '\\\\';
+              name = 'constant.character.escape.leo';
+            },
+            { match = '\\(?i:[abtnrvf]|x[0-9a-fA-F]+;)';
+              name = 'constant.character.escape.leo';
+            },
+            { match = '\\\n\s*';
+              name = 'punctuation.separator.continuation.leo';
+            },
+          );
+        },
+      );
+    };
+    constants = {
+      patterns = (
+        { match = '(?i)(?<![a-zA-Z0-9!$%&*/<=>?^_~+\-.@])(#[tf]|#true|#false)(?![a-zA-Z0-9!$%&*/<=>?^_~+\-.@])';
+          name = 'constant.language.boolean.leo';
+        },
+        { match = '(?<![a-zA-Z0-9!$%&*/<=>?^_~+\-.@])(true|false)(?![a-zA-Z0-9!$%&*/<=>?^_~+\-.@])';
+          name = 'constant.language.boolean.leo';
+        },
+        { match = '(?x)\#\\((?:alarm|backspace|delete|escape|newline|null|return|space|tab|vtab)|[0-7]{3}|x[0-9a-fA-F]+|.)';
+          name = 'string.quoted.other.character.leo';
+        },
+      );
+    };
+    keywords = {
+      patterns = (
+        { match = '(?x)(?<![a-zA-Z0-9!$%&*/<=>?^_~+\-.@])(?:syntax-&gt;datum|datum-&gt;syntax|define-syntax|define-values|quote|quasiquote|unquote-splicing|unquote|syntax|quasisyntax|unsyntax|unsyntax-splicing|assemble|apply|data|enum|rename|only|prefix|except|check|choice|debug|disassemble|do|does|doing|everything|generic|get|gives|giving|in|it|make|match|not|of|package|racket|recipe|recursive|recursively|select|switch|test|the|then|thing|type|use|with|variable|when|unless|from|\.\.\.)(?![a-zA-Z0-9!$%&*/<=>?^_~+\-.@])';
+          name = 'keyword.control.leo';
+        },
+        { match = '`\.\.\.';
+          name = 'punctuation.definition.unquote-splicing.leo';
+        },
+        { match = '`';
+          name = 'punctuation.definition.quasiquote.leo';
+        },
+        { match = ''';
+          name = 'punctuation.definition.quote.leo';
+        },
+        { match = '\'';
+          name = 'punctuation.definition.quote.leo';
+        },
+        { match = '(?x)(?<![a-zA-Z0-9!$%&*/<=>?^_~+\-.@])(?:define|value|lambda|library|import|export|prefix|rename|only|except|if|else|cond|and|or|begin|let|let\*|letrec|set!)(?![a-zA-Z0-9!$%&*/<=>?^_~+\-.@])';
+          name = 'keyword.declaration.leo';
+        },
+      );
+    };
+    punctuation = {
+      patterns = (
+        { match = '[,:]';
+          name = 'punctuation.separator.leo';
+        },
+      );
+    };
+    math_operators = {
+      patterns = (
+        { match = '(?<![a-zA-Z0-9!$%&*/<=>?^_~+\-.@])([+\-*/])(?![a-zA-Z0-9!$%&*/<=>?^_~+\-.@])';
+          name = 'keyword.operator.arithmetic.leo';
+        },
+        { match = '(?<![a-zA-Z0-9!$%&*/<=>?^_~+\-.@])(&lt;=|&gt;=|&lt;|&gt;|=)(?![a-zA-Z0-9!$%&amp;*/&lt;=&gt;?^_~+\-.@])';
+          name = 'keyword.operator.comparison.leo';
+        },
+        { match = '(?<![a-zA-Z0-9!$%&*/<=>?^_~+\-.@])(\(|\)\.\.\.|\)|})(?![a-zA-Z0-9!$%&*/<=>?^_~+\-.@])';
+          name = 'keyword.control.parentheses.leo';
+        },
+      );
+    };
+    identifiers = {
+      patterns = (
+        { match = '(?x)[a-zA-Z!$%&*/<=>?^_~][a-zA-Z0-9!$%&*/<=>?^_~+\-.@]*';
+          name = 'variable.function.leo';
+        },
+      );
+    };
+    numbers = {
+      patterns = (
+        { match = '\b[-]?[0-9]+(\.[0-9]+)?\b';
+          name = 'constant.numeric.leo';
+        },
+      );
+    };
+    preprocessor = {
+      patterns = (
+        { match = '(#lang|#!)';
+          name = 'keyword.control.leo';
+        },
+      );
+    };
+  };
+}
