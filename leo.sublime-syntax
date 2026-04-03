@@ -42,12 +42,17 @@ variables:
       | everything
       | from
       | generic
+      | is\?
+      | predicate
       | get
+      | getter
+      | ref
       | gives
       | giving
       | in
       | it
       | make
+      | maker
       | match
       | not
       | of
@@ -58,6 +63,7 @@ variables:
       | recursive
       | recursively
       | select
+      | sequential
       | switch
       | test
       | the
@@ -75,6 +81,7 @@ variables:
 
   declaration_list: '(?x:
       define
+      | definer
       | value
       | lambda
       | library
@@ -94,6 +101,7 @@ variables:
       | let\*
       | letrec
       | set!
+      | setter!
     )'
 
   char_constant_list: '(?x:
