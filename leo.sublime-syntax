@@ -26,6 +26,8 @@ variables:
       | quasisyntax
       | unsyntax
       | unsyntax-splicing
+      | adjective
+      | adverb
       | assemble
       | apply
       | data
@@ -46,21 +48,24 @@ variables:
       | from
       | generic
       | is\?
-      | predicate
       | get
       | getter
       | ref
       | gives
       | giving
       | in
+      | is
       | it
       | keywords
+      | label
       | make
       | maker
       | match
       | not
+      | noun
       | of
       | package
+      | predicate
       | racket
       | recipe
       | record
@@ -76,9 +81,11 @@ variables:
       | thing
       | type
       | use
+      | unclassified
       | union
       | unless
       | variable
+      | verb
       | when
       | with
       | \.\.\.
@@ -153,11 +160,8 @@ contexts:
     - match: '{{begin}}({{control_list}}){{end}}'
       scope: keyword.control.leo
 
-    - match: '`\.\.\.'
+    - match: "'."
       scope: punctuation.definition.unquote-splicing.leo
-
-    - match: '`'
-      scope: punctuation.definition.quasiquote.leo
 
     - match: "'"
       scope: punctuation.definition.quote.leo
@@ -172,7 +176,7 @@ contexts:
   math_operators:
     - match: '{{begin}}([+\-*/]){{end}}'
       scope: keyword.operator.arithmetic.leo
-    - match: '{{begin}}(<=|>=|<|>|=){{end}}'
+    - match: '{{begin}}(<=|>=|<|>|=|->){{end}}'
       scope: keyword.operator.comparison.leo
     - match: '{{begin}}(\(|\)\.\.\.|\)|}){{end}}'
       scope: keyword.control.parentheses.leo
