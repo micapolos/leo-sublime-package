@@ -160,7 +160,7 @@ contexts:
     - match: '{{begin}}({{control_list}}){{end}}'
       scope: keyword.control.leo
 
-    - match: "'."
+    - match: '''\.\.\.'
       scope: punctuation.definition.unquote-splicing.leo
 
     - match: "'"
